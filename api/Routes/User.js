@@ -2,6 +2,8 @@ const express = require("express");
 const userRoute = express.Router();
 const AsynHandler = require("express-async-handler");
 const User = require("../Models/User");
+const generateToken = require("../TokenGenerate");
+const protect = require("../Middleware/Auth");
 userRoute.post(
   "/login",
   AsynHandler(async (req, res) => {
@@ -13,7 +15,7 @@ userRoute.post(
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
-        token: null,
+        token: generateToken(user._id),
         createdAt: user.createdAt,
       });
     } else {
@@ -37,9 +39,9 @@ userRoute.post(
         name,
         email,
         password,
-      })
+      });
 
-      if(user){
+      if (user) {
         res.status(201).json({
           _id: user._id,
           name: user.name,
@@ -47,13 +49,31 @@ userRoute.post(
           isAdmin: user.isAdmin,
           createdAt: user.createdAt,
         });
-
-      }else{
+      } else {
         res.status(400);
-        throw new Error("Felaktig inmatning")
+        throw new Error("Felaktig inmatning");
       }
+    }
+  })
+);
 
-
+//profile data
+userRoute.get(
+  "/profile",
+  protect,
+  AsynHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+    if (user) {
+      res.json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        createdAt: user.createdAt,
+      });
+    } else {
+      res.status(404);
+      throw new Error("Användare ej hittad");
     }
   })
 );
