@@ -22,12 +22,12 @@ const orderSchema = new mongoose.Schema(
       postalCode: { type: String, required: true },
       country: { type: String, required: true },
     },
-    paymentMethod: { type: String, required: true, deafault: "Paypal" }, //lägga till fler betalningsmetoder
+    paymentMethod: { type: String, required: true, default: "Paypal" },
     paymentResult: {
       id: { type: String },
       status: { type: String },
       updated_time: { type: String },
-      emil_address: { type: String },
+      email_address: { type: String },
     },
     taxPrice: {
       type: Number,
@@ -37,7 +37,7 @@ const orderSchema = new mongoose.Schema(
     shippingPrice: {
       type: Number,
       required: true,
-      deafault: 0.0,
+      default: 0.0,
     },
     totalPrice: {
       type: Number,
@@ -57,7 +57,7 @@ const orderSchema = new mongoose.Schema(
       required: true,
       default: false,
     },
-    deliveresAt: {
+    deliveredAt: {
       type: Date,
     },
   },
@@ -65,4 +65,4 @@ const orderSchema = new mongoose.Schema(
 );
 
 
-moodule.exports = mongoose.model("Order", orderSchema)
+module.exports = mongoose.model("Order", orderSchema)
