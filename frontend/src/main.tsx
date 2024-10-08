@@ -1,23 +1,15 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
 import "./index.css";
-import ProductDetail from './Pages/ProductDetail';
-import {
-
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import App from "./App";
+import { store, persistor } from "./Redux/store";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/" element={<App/>}></Route>
-        <Route path="/detail" element={<ProductDetail/>}></Route>
-      </Routes>
-    </Router>
-  </StrictMode>
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <App/>
+    </PersistGate>
+  </Provider>
 );
