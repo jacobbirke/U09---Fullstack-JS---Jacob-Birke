@@ -3,10 +3,8 @@ const app = express();
 const dotenv = require("dotenv");
 dotenv.config();
 const PORT = process.env.PORT;
-app.use(express.json());
-
+const cors = require("cors");
 const mongoose = require("mongoose");
-
 //connect db
 mongoose
   .connect(process.env.MONGOOSEDB_URI)
@@ -19,6 +17,11 @@ const databaseSeeder = require("./databaseSeeder");
 const userRoute = require("./Routes/User");
 const productRoute = require("./Routes/Product");
 const orderRoute = require("./Routes/Order");
+
+app.use(express.json());
+
+app.use(cors());
+
 //database seeder routes
 app.use("/api/seed", databaseSeeder);
 
