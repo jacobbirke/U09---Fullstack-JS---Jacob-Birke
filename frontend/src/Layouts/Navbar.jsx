@@ -1,4 +1,17 @@
+import { useDispatch, useSelector } from "react-redux";
+import { UserLoginReducer } from "./../Redux/Reducers/User";
+import { UserDropdown } from "../Components/Dropdown";
+import { Link } from "react-router-dom";
+import { UserLogoutAction } from "../Redux/Actions/User";
+
 const Navbar = () => {
+  const UserLoginReducer = useSelector((state) => state.UserLoginReducer);
+  const { userInfo } = UserLoginReducer;
+  const dispatch = useDispatch();
+
+  const logoutHandler = () => {
+    dispatch(UserLogoutAction());
+  };
   return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -13,16 +26,21 @@ const Navbar = () => {
               alt="Flowbite Logo"
             />
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              Flowbite
+              Book Shop
             </span>
           </a>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <button
-              type="button"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Get started
-            </button>
+            {!userInfo ? (
+              <Link
+                to="/register"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Get started
+              </Link>
+            ) : (
+              <UserDropdown logoutHandler = {logoutHandler}></UserDropdown>
+            )}
+
             <button
               data-collapse-toggle="navbar-cta"
               type="button"
