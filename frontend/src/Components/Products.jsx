@@ -31,8 +31,7 @@ const Products = () => {
                               <img
                                 src={product.image}
                                 alt="Front of men's Basic Tee in black."
-                                className="h-full w-full object-contain"
-                              />
+                                className="h-full w-full object-contain"                              />
                             </div>
                             <div className="mt-4 flex justify-between">
                               <div>
