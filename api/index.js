@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
+const serverless = require('serverless-http');
 dotenv.config();
 const PORT = process.env.PORT;
 const cors = require("cors");
@@ -42,3 +43,7 @@ app.listen(PORT || 9000, () => {
 app.use("/api/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID);
 });
+
+module.exports = app;
+module.exports.handler = serverless(app);
+
