@@ -1,16 +1,6 @@
 {
   "version": 2,
-  "name": "JB-shop-api",
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    }
-  ]
-}
-{
-  "version": 2,
-  "name": "music-album",
+  "name": "jb-books-api",
   "builds": [
       {
           "src": "index.js",
