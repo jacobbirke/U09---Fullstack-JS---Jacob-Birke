@@ -37,3 +37,8 @@ app.use("/api/orders", orderRoute);
 app.listen(PORT || 9000, () => {
   console.log(`server listening on port ${PORT}`);
 });
+
+//paypal pay
+app.use("/api/config/paypal", (req, res) => {
+  res.send(process.env.PAYPAL_CLIENT_ID);
+});
