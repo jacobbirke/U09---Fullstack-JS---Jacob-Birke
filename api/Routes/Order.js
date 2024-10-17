@@ -11,20 +11,20 @@ orderRoute.post(
     const {
       orderItems,
       shippingAddress,
-      paymentMethods,
+      paymentMethod,
       shippingPrice,
       taxPrice,
       totalPrice,
       price,
     } = req.body;
-    if (orderItems && orderItems.lengt === 0) {
+    if (orderItems && orderItems.length === 0) {
       res.status(400);
       throw new Error("Ingen order hittad");
     } else {
       const order = new Order({
         orderItems,
         shippingAddress,
-        paymentMethods,
+        paymentMethod,
         shippingPrice,
         taxPrice,
         totalPrice,
