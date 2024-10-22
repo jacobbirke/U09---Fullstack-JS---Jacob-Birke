@@ -103,21 +103,21 @@ export default function PlaceOrder() {
                   </p>
                   <div className="flex border-t border-gray-200 py-2">
                     <span className="text-gray-500">Subtotal</span>
-                    <span className="ml-auto text-gray-900">${subtotal}</span>
+                    <span className="ml-auto text-gray-900">{subtotal} kr</span>
                   </div>
                   <div className="flex border-t border-gray-200 py-2">
                     <span className="text-gray-500">Moms</span>
-                    <span className="ml-auto text-gray-900">${taxPrice}</span>
+                    <span className="ml-auto text-gray-900">{taxPrice} kr</span>
                   </div>
                   <div className="flex border-t border-b mb-6 border-gray-200 py-2">
                     <span className="text-gray-500">Shipping</span>
                     <span className="ml-auto text-gray-900">
-                      ${shippingPrice}
+                      {shippingPrice} kr
                     </span>
                   </div>
                   <div className="flex">
                     <span className="title-font font-medium text-2xl text-gray-900">
-                      ${total}
+                      {total} kr
                     </span>
                   </div>
                 </div>

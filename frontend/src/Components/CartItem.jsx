@@ -32,7 +32,7 @@ export default function CartItem({cartItems}) {
                       <h3>
                         <a href={product.href}>{product.name}</a>
                       </h3>
-                      <p className="ml-4">${product.price}</p>
+                      <p className="ml-4">{product.price} kr</p>
                     </div>
                   </div>
                   <div className="flex flex-1 items-end justify-between text-sm">
