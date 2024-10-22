@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../Layouts/Layouts";
-import { UserLoginReducer } from "./../../Redux/Reducers/User";
 import { UserLoginAction } from "../../Redux/Actions/User";
 import { useState } from "react";
 
@@ -20,9 +19,11 @@ export default function Login() {
       <Layout>
         {loading ? (
           <h1>loading</h1>
-        ) : error ? (
-          <h1>{error}</h1>
-        ) : (
+        ) 
+        // : error ? (
+        //   <h1>{error}</h1>
+        // ) 
+        : (
           <>
             <form
               className="max-w-sm mx-auto h-screen"
@@ -33,7 +34,7 @@ export default function Login() {
                   htmlFor="email"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Your email
+                  Email
                 </label>
                 <input
                   type="text"
@@ -50,12 +51,13 @@ export default function Login() {
                   htmlFor="password"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Your password
+                  Password
                 </label>
                 <input
                   type="password"
                   id="password"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="******"
                   required
                   value={password || ""} 
                   onChange={(e) => setPassword(e.target.value)}
