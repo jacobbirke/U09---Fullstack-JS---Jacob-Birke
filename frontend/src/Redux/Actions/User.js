@@ -147,7 +147,7 @@ export const UserUpdateAction = (user) => async (dispatch, getState) => {
 export const UserDeleteAction = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_DELETE_REQ });
-    
+
     const {
       userLoginReducer: { userInfo },
     } = getState();
@@ -157,6 +157,7 @@ export const UserDeleteAction = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
+
     await axios.delete(`${BASE_URL}/api/users/${id}`, config);
 
     dispatch({ type: USER_DELETE_REQ_SUCCESS, payload: id });
@@ -167,3 +168,4 @@ export const UserDeleteAction = (id) => async (dispatch, getState) => {
     });
   }
 };
+
