@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import Checkout from "./Pages/Checkout";
 import PlaceOrder from "./Pages/PlaceOrder";
 import AdminPage from './Pages/Admin/Admin';
+import MyAdmin from './Pages/Admin/myadmin';
 
 function App() {
   const UserLoginReducer = useSelector((state) => state.UserLoginReducer);
@@ -21,6 +22,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />}></Route>
+          <Route path="/myadmin" element={<MyAdmin />}></Route>
           <Route path="/products/:id" element={<ProductDetail />}></Route>
           <Route
             path="/login"

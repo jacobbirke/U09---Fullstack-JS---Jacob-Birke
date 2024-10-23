@@ -172,6 +172,7 @@ userRoute.delete(
   protect,
   admin,
   AsyncHandler(async (req, res) => {
+    console.log(`Delete request received for user ID: ${req.params.id}`);
     const user = await User.findById(req.params.id);
     if (user) {
       await user.remove();
@@ -182,5 +183,6 @@ userRoute.delete(
     }
   })
 );
+
 
 module.exports = userRoute;

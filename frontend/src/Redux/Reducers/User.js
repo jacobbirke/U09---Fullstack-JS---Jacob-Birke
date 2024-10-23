@@ -59,19 +59,26 @@ const initialState = {
 // User List Reducer
 export const UserListReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "USER_LIST_REQUEST":
+    case USER_LIST_REQ:
       return { ...state, loading: true, users: [] }; // Reset users to an empty array when loading starts
 
-    case "USER_LIST_SUCCESS":
+    case USER_LIST_REQ_SUCCESS:
       return { ...state, loading: false, users: action.payload }; // Populate users from the action payload
 
-    case "USER_LIST_FAIL":
+    case USER_LIST_REQ_FAIL:
       return { ...state, loading: false, error: action.payload, users: [] }; // Set error and reset users to empty array
+
+    case USER_DELETE_REQ_SUCCESS:
+      return {
+        ...state,
+        users: state.users.filter(user => user._id !== action.payload), // Remove deleted user from state
+      };
 
     default:
       return state;
   }
 };
+
 
 // User update reducer (for admin)
 export const UserUpdateReducer = (state = {}, action) => {
