@@ -3,7 +3,7 @@ import storage from "redux-persist/lib/storage";
 import { persistStore, persistReducer } from "redux-persist";
 import { ProductListReducer, ProductReducer } from "./Reducers/Product";
 import {thunk} from "redux-thunk";
-import { UserLoginReducer, UserRegisterReducer } from "./Reducers/User";
+import { UserDeleteReducer, UserListReducer, UserLoginReducer, UserRegisterReducer, UserUpdateReducer } from "./Reducers/User";
 import { CartReducer } from "./Reducers/Cart";
 import { orderDetailReducer, orderPaymentReducer, orderReducer } from "./Reducers/Order";
 
@@ -21,7 +21,10 @@ const rootReducer = combineReducers({
   CartReducer,
   orderReducer,
   orderDetailReducer,
-  orderPaymentReducer
+  orderPaymentReducer,
+  UserListReducer,
+  UserUpdateReducer,
+  UserDeleteReducer
    
 });
 

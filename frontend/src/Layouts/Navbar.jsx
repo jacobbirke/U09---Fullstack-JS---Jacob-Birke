@@ -41,7 +41,7 @@ const Navbar = () => {
               <>
                 <Link
                   to="/login"
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  className="text-white mr-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Login
                 </Link>
@@ -54,11 +54,11 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <UserDropdown logoutHandler={logoutHandler}></UserDropdown>
+                <UserDropdown logoutHandler={logoutHandler} isAdmin={userInfo.isAdmin}></UserDropdown>
                 <button
                   data-collapse-toggle="navbar-cta"
                   type="button"
-                  className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                  className="inline-flex items-center p-2 w-50 h-10 justify-center text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                   aria-controls="navbar-cta"
                   aria-expanded="false"
                   onClick={() => setOpen(true)}
@@ -123,3 +123,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

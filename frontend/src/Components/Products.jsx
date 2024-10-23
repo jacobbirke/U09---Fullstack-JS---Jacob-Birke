@@ -28,7 +28,7 @@ const Products = () => {
     <div className="bg-gray-100 min-h-screen py-10">
       <div className="container mx-auto px-5 py-10">
         {/* Search Bar */}
-        <div className="mb-5">
+        <div className="mb-8">
           <input
             type="text"
             placeholder="Search for products..."
