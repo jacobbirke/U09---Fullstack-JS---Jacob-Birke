@@ -19,16 +19,15 @@ export interface UserLoginState {
 // Define the overall RootState interface
 export interface RootState {
   UserLoginReducer: UserLoginState;
-  // Add types for other reducers here
-  ProductListReducer: ProductListState ; // Replace 'any' with the actual type for ProductListReducer
-  ProductReducer: ProductState; // Same as above
-  CartReducer: CartState; // Same as above
-  orderReducer: orderState; // Same as above
-  orderDetailReducer: orderDetailState; // Same as above
-  orderPaymentReducer: orderPaymentState; // Same as above
-  UserListReducer: UserListState; // Same as above
-  UserUpdateReducer: UserUpdateSate; // Same as above
-  UserDeleteReducer: UserDeleteState; // Same as above
+  ProductListReducer: ProductListState ;
+  ProductReducer: ProductState; 
+  CartReducer: CartState; 
+  orderReducer: orderState; 
+  orderDetailReducer: orderDetailState; 
+  orderPaymentReducer: orderPaymentState; 
+  UserListReducer: UserListState; 
+  UserUpdateReducer: UserUpdateSate; 
+  UserDeleteReducer: UserDeleteState; 
 }
 
 declare module './Pages/ProductDetail' {
