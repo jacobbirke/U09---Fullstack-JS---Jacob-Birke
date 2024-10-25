@@ -13,9 +13,10 @@ import Checkout from "./Pages/Checkout";
 import PlaceOrder from "./Pages/PlaceOrder";
 import AdminPage from './Pages/Admin/Admin';
 import MyAdmin from './Pages/Admin/myadmin';
+import { RootState } from './global'; // Import RootState from global.d.ts
 
 function App() {
-  const UserLoginReducer = useSelector((state) => state.UserLoginReducer);
+  const UserLoginReducer = useSelector((state: RootState) => state.UserLoginReducer);
   const { userInfo } = UserLoginReducer;
   return (
     <>
@@ -32,7 +33,7 @@ function App() {
             path="/register"
             element={userInfo ? <Navigate to="/"></Navigate> : <Register />}
           ></Route>
-          <Route path="/checkout" element={<Checkout />}></Route>
+          <Route path="/checkout" element={<Checkout open={undefined} setOpen={undefined} />}></Route>
           <Route path="/placeorder" element={<PlaceOrder />}></Route>
 
           <Route
