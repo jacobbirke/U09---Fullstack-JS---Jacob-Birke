@@ -4,13 +4,15 @@
     "lib": ["ES2023"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "outDir": "./dist",
+    "composite": true, // Ensure this is set
+    "declaration": true, // If you want declaration files for this project
 
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "noEmit": false, // Changed to false
 
     /* Linting */
     "strict": true,

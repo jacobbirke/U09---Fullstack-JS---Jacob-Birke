@@ -1,17 +1,20 @@
 {
+  "extends": "./tsconfig.json",
   "compilerOptions": {
+    "outDir": "./dist",
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "composite": true, // Ensure this is set
+    "declaration": true, // If you want declaration files for this project
 
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "noEmit": false, // Changed to false
     "jsx": "react-jsx",
 
     /* Linting */
@@ -20,5 +23,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": ["src", "public/service-worker.js"]
 }

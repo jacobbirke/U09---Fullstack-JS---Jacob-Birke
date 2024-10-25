@@ -17,6 +17,7 @@ const databaseSeeder = require("./databaseSeeder");
 const userRoute = require("./Routes/User");
 const productRoute = require("./Routes/Product");
 const orderRoute = require("./Routes/Order");
+const path = require("path");  // Add this line
 
 app.use(express.json());
 
@@ -42,5 +43,12 @@ app.listen(PORT || 9000, () => {
 app.use("/api/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID);
 });
+
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
 
 module.exports = app;

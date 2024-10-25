@@ -7,7 +7,19 @@
   "compilerOptions": {
     "allowJs": true,
     "checkJs": false,
-    "noEmit": true,
-    "jsx": "react"
-  }
+    "noEmit": false,
+    "jsx": "react",
+    "target": "esnext",
+    "module": "esnext",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist",
+    "composite": true, // Set to true for composite projects
+    "declaration": true // Generate declaration files
+  },
+  "include": [
+    "src/**/*" // Ensure it includes all files in src
+  ]
 }
