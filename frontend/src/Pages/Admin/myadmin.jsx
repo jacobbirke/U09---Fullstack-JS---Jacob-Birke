@@ -8,7 +8,7 @@ function MyAdmin() {
   const [view, setView] = useState("orders"); // Default view
   const [errorDetails, setErrorDetails] = useState(null); // State for error details
 
-  const apiBaseUrl = "http://localhost:3000/api"; // Updated API base URL
+  const apiBaseUrl = "https://u09-fullstack-js-jacob-birke.vercel.app/api"; // Updated API base URL
   
   const token = localStorage.getItem("token"); 
 
@@ -40,7 +40,7 @@ function MyAdmin() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch(`${apiBaseUrl}/products`, {
+      const response = await fetch(`${apiBaseUrl}/api/products`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -59,7 +59,7 @@ function MyAdmin() {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch(`${apiBaseUrl}/users`, {
+      const response = await fetch(`${apiBaseUrl}/api/users`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -83,7 +83,7 @@ function MyAdmin() {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch("http://localhost:3010/api/users/delete", {
+      const response = await fetch(`${apiBaseUrl}api/users/delete`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
