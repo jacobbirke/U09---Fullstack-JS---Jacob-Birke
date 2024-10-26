@@ -103,7 +103,7 @@ export const UserListAction = () => async (dispatch, getState) => {
     };
 
     // Make the API call to fetch users
-    const { data } = await axios.get(`http://localhost:3000/api/users`, config);
+    const { data } = await axios.get(`${BASE_URL}/api/users`, config);
 
     // Dispatch success action if users are fetched successfully
     dispatch({ type: USER_LIST_REQ_SUCCESS, payload: data });

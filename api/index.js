@@ -50,5 +50,11 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
+const corsOptions = {
+  origin: 'https://u09-fullstack-js-jacob-birke-bohc-goejsy5i1.vercel.app/', 
+  credentials: true, 
+};
+
+app.use(cors(corsOptions));
 
 module.exports = app;
