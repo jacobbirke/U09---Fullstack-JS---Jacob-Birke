@@ -21,7 +21,6 @@ const path = require("path");  // Add this line
 
 app.use(express.json());
 
-app.use(cors());
 
 //database seeder routes
 app.use("/api/seed", databaseSeeder);

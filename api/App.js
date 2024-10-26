@@ -7,7 +7,6 @@ const MONGOOSEDB_URI = process.env.MONGOOSEDB_URI; // Use the URI from .env
 const PORT = process.env.PORT || 3000; // Use the PORT from .env or default to 3000
 
 const app = express();
-app.use(cors());
 app.use(express.json()); // To parse JSON bodies
 
 // Connect to MongoDB
