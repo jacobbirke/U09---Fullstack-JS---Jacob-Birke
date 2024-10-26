@@ -117,3 +117,10 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+const corsOptions = {
+    origin: 'https://u09-fullstack-js-jacob-birke-bohc-goejsy5i1.vercel.app/', 
+    credentials: true, 
+  };
+
+  app.use(cors(corsOptions));
