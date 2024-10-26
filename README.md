@@ -45,32 +45,25 @@ Deployment: Plattform som stöder Node.js
 Installation
 Klona repositoriet:
 bash
-Kopiera kod
 git clone https://github.com/your-username/your-repo.git
 Gå till projektkatalogen:
 bash
-Kopiera kod
 cd your-repo
 Installera Tailwind CSS:
 bash
-Kopiera kod
 npx tailwindcss init -p
 Backend-uppsättning
 Gå till Backend-mappen:
 bash
-Kopiera kod
 cd Backend
 Installera beroenden:
 bash
-Kopiera kod
 npm install
 Skapa en .env-fil:
 bash
-Kopiera kod
 touch .env
 Lägg till variabler som:
 plaintext
-Kopiera kod
 PORT=3000
 DB_URI=mongodb://din_mongodb_uri
 MONGO_USERNAME=
@@ -81,45 +74,39 @@ JWT_SECRET=
 PAYPAL_CLIENT_ID=
 Starta backend-servern:
 bash
-Kopiera kod
 npm start
 Frontend-uppsättning
 Gå till frontend-mappen:
 bash
-Kopiera kod
 cd Frontend
 Installera beroenden:
 bash
-Kopiera kod
 npm install
 Starta utvecklingsservern:
 bash
-Kopiera kod
 npm run dev
 API-dokumentation
 Jag använde mig av Insomnia för API-testning och utveckling.
 
 Användarregistrering
 Metod: POST
-URL: http://localhost:3000/api/auth/register
+URL: http://localhost:3000/api/users
 Body (JSON):
 
 json
-Kopiera kod
 {
-  "username": "testuser",
-  "email": "test@example.com",
-  "password": "password123"
+	"name" : "user2",
+	"email" : "user2@gmail.com",
+	"password" : "123456"
 }
 Användarinloggning
 Metod: POST
-URL: http://localhost:3000/api/auth/login
+URL: http://localhost:3000/api/users/login
 Body (JSON):
 
 json
-Kopiera kod
 {
-  "email": "test@example.com",
-  "password": "password123"
+	"email" : "user@gmail.com",
+	"password" : "12345678"
 }
 Genom att använda Insomnia för att testa registrerings- och inloggningsfunktionerna har jag kunnat säkerställa att dessa viktiga delar av webshoppen fungerar som de ska. Verktygets funktioner för snabb feedback, enkel felsökning och effektiv validering har varit avgörande för att skapa en användarvänlig applikation.
