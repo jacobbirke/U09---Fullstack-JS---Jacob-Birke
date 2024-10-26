@@ -1,11 +1,15 @@
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
-dotenv.config();
-const PORT = process.env.PORT;
 const cors = require("cors");
 const mongoose = require("mongoose");
-//connect db
+const path = require("path");  // Path module for serving static files
+
+dotenv.config();
+
+const PORT = process.env.PORT || 9000; // Default to 9000 if PORT is not set
+
+// Connect to MongoDB
 mongoose
   .connect(process.env.MONGOOSEDB_URI)
   .then(() => console.log("db connected"))
@@ -13,47 +17,48 @@ mongoose
     console.error("Connection error", err);
   });
 
+// CORS Options
+const corsOptions = {
+  origin: 'https://u09-fullstack-js-jacob-birke-bohc-goejsy5i1.vercel.app', // Ensure this matches your frontend URL exactly
+  credentials: true, 
+};
+
+// Apply CORS middleware with options before defining routes
+app.use(cors(corsOptions));
+app.use(express.json());
+
+// Import routes
 const databaseSeeder = require("./databaseSeeder");
 const userRoute = require("./Routes/User");
 const productRoute = require("./Routes/Product");
 const orderRoute = require("./Routes/Order");
-const path = require("path");  // Add this line
 
-app.use(express.json());
-
-
-//database seeder routes
+// Database seeder routes
 app.use("/api/seed", databaseSeeder);
 
-//routes for users
+// Routes for users
 app.use("/api/users", userRoute);
 
-//routes for products
+// Routes for products
 app.use("/api/products", productRoute);
 
-//routes for order
+// Routes for orders
 app.use("/api/orders", orderRoute);
 
-app.listen(PORT || 9000, () => {
-  console.log(`server listening on port ${PORT}`);
-});
-
-//paypal pay
+// PayPal configuration
 app.use("/api/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID);
 });
 
+// Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
+// Catch-all handler for any requests not handled above
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
-const corsOptions = {
-  origin: 'https://u09-fullstack-js-jacob-birke-bohc-goejsy5i1.vercel.app/', 
-  credentials: true, 
-};
-
-app.use(cors(corsOptions));
-
-module.exports = app;
+// Start the server
+app.listen(PORT, () => {
+  console.log(`server listening on port ${PORT}`);
+});
