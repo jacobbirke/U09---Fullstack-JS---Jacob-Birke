@@ -118,7 +118,7 @@ app.listen(PORT, () => {
 });
 
 const corsOptions = {
-    origin: 'https://u09-fullstack-js-jacob-birke-bohc-goejsy5i1.vercel.app/', 
+    origin: 'https://u09-fullstack-js-jacob-birke-bohc.vercel.app/', 
     credentials: true, 
   };
 
