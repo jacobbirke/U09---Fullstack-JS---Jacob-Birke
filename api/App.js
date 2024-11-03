@@ -9,12 +9,21 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'https://u09-fullstack-js-jacob-birke-bohc.vercel.app'); // Your front-end URL
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    next();
+});
+
+
 // Set up CORS
 const corsOptions = {
     origin: 'https://u09-fullstack-js-jacob-birke-bohc.vercel.app', // No trailing slash
     credentials: true,
 };
 app.use(cors(corsOptions));
+
 
 // Connect to MongoDB
 mongoose.connect(MONGOOSEDB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
