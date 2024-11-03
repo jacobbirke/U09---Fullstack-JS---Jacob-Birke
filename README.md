@@ -146,7 +146,7 @@ Genom att använda Insomnia för att testa registrerings- och inloggningsfunktio
 Här är några low-fidelity wireframes jag skapade i Figma för att planera den grundläggande strukturen i webshopen:
 
 ### Home Page
-![Home Page Wireframe](assets\image.png)
+![Home Page Wireframe](/assets\image.png)
 
 ### Product Page
 ![Product Page Wireframe](/assets/image%20copy.png)
