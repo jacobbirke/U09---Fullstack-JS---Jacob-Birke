@@ -16,8 +16,8 @@ Webshoppen skapades för att erbjuda en plattform för försäljning av olika pr
 - **Databas**: MongoDB
 - **Autentisering**: JWT för användarautentisering
 - **Betalning**: PayPal för smidig betalning
-- **Design**: Figma för lågupplöst design
-- **Deployment**: Plattform som stöder Node.js
+- **Design**: Figma för low-fi design
+- **Deployment**: Vercel
 
 ## Installation
 
