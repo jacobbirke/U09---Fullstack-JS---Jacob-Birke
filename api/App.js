@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
 require('dotenv').config();
 
 const MONGOOSEDB_URI = process.env.MONGOOSEDB_URI;
@@ -17,12 +16,6 @@ app.use((req, res, next) => {
 });
 
 
-// Set up CORS
-const corsOptions = {
-    origin: 'https://u09-fullstack-js-jacob-birke-bohc.vercel.app', // No trailing slash
-    credentials: true,
-};
-app.use(cors(corsOptions));
 
 
 // Connect to MongoDB

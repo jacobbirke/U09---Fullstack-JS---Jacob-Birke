@@ -20,7 +20,7 @@ mongoose
 // CORS Options
 const corsOptions = {
   origin: [
-    'https://u09-fullstack-js-jacob-birke-bohc.vercel.app/', 
+    'https://u09-fullstack-js-jacob-birke-bohc.vercel.app', 
     'http://localhost:5173'
   ], 
   credentials: true, 
