@@ -38,9 +38,6 @@ app.get('/api/users', async (req, res) => {
     // Your existing route logic
 });
 
-app.post('/api/users/delete', async (req, res) => {
-    // Your existing route logic
-});
 
 // Error handling middleware
 app.use((err, req, res, next) => {

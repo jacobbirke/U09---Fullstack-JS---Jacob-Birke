@@ -120,21 +120,21 @@ userRoute.get(
   })
 );
 
-// // Get User by ID (Admin only)
-// userRoute.get(
-//   "/:id",
-//   protect,
-//   admin,
-//   AsyncHandler(async (req, res) => {
-//     const user = await User.findById(req.params.id);
-//     if (user) {
-//       res.json(user);
-//     } else {
-//       res.status(404);
-//       throw new Error("User not found");
-//     }
-//   })
-// );
+// Get User by ID (Admin only)
+userRoute.get(
+  "/:id",
+  protect,
+  admin,
+  AsyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id);
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404);
+      throw new Error("User not found");
+    }
+  })
+);
 
 // Update User (Admin only)
 userRoute.put(
@@ -167,19 +167,29 @@ userRoute.put(
 );
 
 // Delete User (Admin only)
-userRoute.delete(
-  "/:id",
+userRoute.post(
+  "/delete",
   protect,
   admin,
   AsyncHandler(async (req, res) => {
-    console.log(`Delete request received for user ID: ${req.params.id}`);
-    const user = await User.findById(req.params.id);
-    if (user) {
-      await user.remove();
-      res.json({ message: "User removed" });
-    } else {
-      res.status(404);
-      throw new Error("User not found");
+    try {
+      const { userId } = req.body;
+
+      if (!userId) {
+        return res.status(400).json({ message: "User ID is required" });
+      }
+
+      // Find the user by ID and delete them
+      const deletedUser = await User.findByIdAndDelete(userId);
+
+      if (!deletedUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      res.json({ message: "User deleted successfully", user: deletedUser });
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      res.status(500).json({ message: "Server error", error: error.message });
     }
   })
 );

@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { BASE_URL } from './../../Redux/Constants/BASE_URL';
 
 function MyAdmin() {
   const [orders, setOrders] = useState([]);
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
-  const [view, setView] = useState("orders"); // Default view
-  const [errorDetails, setErrorDetails] = useState(null); // State for error details
+  const [view, setView] = useState("orders"); 
+  const [errorDetails, setErrorDetails] = useState(null);
 
-  const apiBaseUrl = "https://u09-fullstack-js-jacob-birke.vercel.app"; // Updated API base URL
-  
-  const token = localStorage.getItem("token"); 
+
+
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     if (view === "orders") fetchOrders();
@@ -20,8 +21,7 @@ function MyAdmin() {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch(`${apiBaseUrl}/api/orders`,
-         {
+      const response = await fetch(`${BASE_URL}/api/orders`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -40,7 +40,7 @@ function MyAdmin() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch(`${apiBaseUrl}/api/products`, {
+      const response = await fetch(`${BASE_URL}/api/products`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -59,7 +59,7 @@ function MyAdmin() {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch(`${apiBaseUrl}/api/users`, {
+      const response = await fetch(`${BASE_URL}/api/users`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -81,15 +81,15 @@ function MyAdmin() {
       `Are you sure you want to delete the user with ID: ${userId}?`
     );
     if (!confirmDelete) return;
-
+    
     try {
-      const response = await fetch(`${apiBaseUrl}/api/users/delete`, {
+      const response = await fetch(`${BASE_URL}/api/users/delete`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Include the JWT token for delete request
+          Authorization: `Bearer ${token}`, 
         },
-        body: JSON.stringify({ userId }),
+        body: JSON.stringify({ userId }), 
       });
 
       if (!response.ok) {
