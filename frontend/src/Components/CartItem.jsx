@@ -46,7 +46,7 @@ export default function CartItem({cartItems}) {
                             Number(e.target.value)
                           )
                         }
-                        className="rounded ml-3 border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10"
+                        className="rounded ml-3 border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500 text-base pl-3 pr-10"
                       >
                         {[...Array(product.countInStock).keys()].map((x) => (
                           <option key={x + 1} value={x + 1}>
@@ -59,7 +59,7 @@ export default function CartItem({cartItems}) {
                     <div className="flex">
                       <button
                         type="button"
-                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                        className="font-medium text-blue-600 hover:text-blue-500"
                         onClick={() => removeFromCartHandler(product.product)}
                       >
                         Remove
