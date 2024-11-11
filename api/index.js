@@ -21,7 +21,6 @@ mongoose
 const corsOptions = {
   origin: [
     'https://u09-fullstack-js-jacob-birke-bohc.vercel.app', // Frontend deployed URL
-    'https://u09-fullstack-js-jacob-birke-bohc-nkl9amn86.vercel.app/',
     'http://localhost:5173' // Local development URL
   ],
   credentials: true, // If you're using cookies or session-based auth
