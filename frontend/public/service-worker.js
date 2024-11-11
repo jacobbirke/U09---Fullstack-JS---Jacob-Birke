@@ -1,28 +1,25 @@
-// public/service-worker.js
-
-const CACHE_NAME = "v2";
+const CACHE_NAME = "v3"; // Update cache version as needed
 const urlsToCache = [
   "/",
   "/index.html",
   "/manifest.json",
+  "/offline.html", // A simple offline page
   "/src/index.css", // CSS file (check final build output path)
   "/src/main.tsx", // JavaScript entry point (check final output path)
-  // '/admin',                      // Admin page
-  // '/login',                        // Login page
-  // '/register',                     // Register page
-  // '/placeorder',                   // Place order page
+  // Add any other critical files
 ];
 
 // Install event
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log("Opened cache");
+      console.log("Opened cache and pre-caching files");
       return cache.addAll(urlsToCache);
     })
   );
 });
 
+// Fetch event
 self.addEventListener("fetch", (event) => {
   const { request } = event;
 
@@ -40,7 +37,7 @@ self.addEventListener("fetch", (event) => {
         .catch(() => {
           // If offline, return cached response if it exists
           return caches.match(request).then((cachedResponse) => {
-            return cachedResponse || Promise.reject('No cache for API response');
+            return cachedResponse || caches.match("/offline.html");
           });
         })
     );
@@ -85,7 +82,6 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(fetch(request).catch(() => caches.match(request)));
   }
 });
-
 
 // Activate event
 self.addEventListener("activate", (event) => {
