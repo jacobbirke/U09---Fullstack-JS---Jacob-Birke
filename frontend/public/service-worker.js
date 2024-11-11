@@ -9,12 +9,35 @@ const urlsToCache = [
   // Add any other critical files
 ];
 
+// Pre-fetch and cache critical API data during install
+const apiUrlsToCache = [
+  "/api/products",
+  // Add other important API endpoints you want to cache
+];
+
 // Install event
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log("Opened cache and pre-caching files");
-      return cache.addAll(urlsToCache);
+      // Cache static files
+      return cache.addAll(urlsToCache).then(() => {
+        // Pre-fetch and cache critical API responses
+        return Promise.all(
+          apiUrlsToCache.map((url) => {
+            return fetch(url)
+              .then((response) => {
+                if (response.ok) {
+                  // Clone the response to cache it and use it in the future
+                  return cache.put(url, response.clone());
+                }
+              })
+              .catch((err) => {
+                console.error(`Failed to pre-cache ${url}:`, err);
+              });
+          })
+        );
+      });
     })
   );
 });
@@ -28,7 +51,7 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(
       fetch(request)
         .then((networkResponse) => {
-          // Optionally cache the network response for future offline use
+          // Cache the network response for future offline use
           return caches.open(CACHE_NAME).then((cache) => {
             cache.put(request, networkResponse.clone());
             return networkResponse;
