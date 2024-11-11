@@ -34,10 +34,10 @@ function ProductDetail() {
               <div className="lg:w-4/5 mx-auto flex flex-wrap">
                 <img
                   alt="ecommerce"
-                  className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
+                  className="lg:w-1/2 w-full object-contain object-center rounded h-auto"
                   src={product.image}
-                  img
                 />
+
                 <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                   <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
                     {product.name}

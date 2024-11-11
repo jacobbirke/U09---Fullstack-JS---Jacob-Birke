@@ -1,22 +1,18 @@
-const CACHE_NAME = "v3"; // Update cache version as needed
+const CACHE_NAME = "4"; 
 const urlsToCache = [
   "/",
   "/index.html",
   "/manifest.json",
-  "/offline.html", // A simple offline page
-  "/src/index.css", // CSS file (check final build output path)
-  "/src/main.tsx", // JavaScript entry point (check final output path)
-  '/admin',                      // Admin page
-  '/login',                        // Login page
-  '/register',                     // Register page
-  '/placeorder',                   // Place order page
-  '/products/:id',
-  '/myadmin', 
-  '/products', 
-
+  "/offline.html", 
+  "/src/index.css",
+  "/src/main.tsx",
+  '/admin',
+  '/login',
+  '/register',
+  '/placeorder',
+  '/products',
 ];
 
-// Pre-fetch and cache critical API data during install
 const apiUrlsToCache = [
   "/api/products",
   "/api/users",
@@ -55,38 +51,22 @@ self.addEventListener("install", (event) => {
 self.addEventListener("fetch", (event) => {
   const { request } = event;
 
-  // Handle API requests separately (network-first for APIs)
+  // Handle API requests
   if (request.url.includes("/api/")) {
     event.respondWith(
       fetch(request)
         .then((networkResponse) => {
-          // Cache the network response for future offline use
           return caches.open(CACHE_NAME).then((cache) => {
             cache.put(request, networkResponse.clone());
             return networkResponse;
           });
         })
         .catch(() => {
-          // If offline, return cached response if it exists
+          // If offline, return cached response or fallback to offline page
           return caches.match(request).then((cachedResponse) => {
             return cachedResponse || caches.match("/offline.html");
           });
         })
-    );
-  } else if (request.url.match(/\/products\/\d+/)) {
-    // This matches URLs like /products/1, /products/2, etc.
-    event.respondWith(
-      caches.match(request).then((cachedResponse) => {
-        return (
-          cachedResponse ||
-          fetch(request).then((networkResponse) => {
-            return caches.open(CACHE_NAME).then((cache) => {
-              cache.put(request, networkResponse.clone());
-              return networkResponse;
-            });
-          })
-        );
-      })
     );
   } else if (request.mode === "navigate") {
     // Handle navigation requests (HTML)
@@ -115,7 +95,6 @@ self.addEventListener("fetch", (event) => {
         return (
           cachedResponse ||
           fetch(request).then((networkResponse) => {
-            // Cache the network response for future offline use
             return caches.open(CACHE_NAME).then((cache) => {
               cache.put(request, networkResponse.clone());
               return networkResponse;
@@ -140,7 +119,6 @@ self.addEventListener("activate", (event) => {
         return Promise.all(
           cacheNames.map((cacheName) => {
             if (!cacheWhitelist.includes(cacheName)) {
-              console.log(`Deleting old cache: ${cacheName}`);
               return caches.delete(cacheName);
             }
           })
