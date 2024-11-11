@@ -26,7 +26,26 @@ self.addEventListener("install", (event) => {
 self.addEventListener("fetch", (event) => {
   const { request } = event;
 
-  if (request.mode === "navigate") {
+  // Handle API requests separately (network-first for APIs)
+  if (request.url.includes("/api/")) {
+    event.respondWith(
+      fetch(request)
+        .then((networkResponse) => {
+          // Optionally cache the network response for future offline use
+          return caches.open(CACHE_NAME).then((cache) => {
+            cache.put(request, networkResponse.clone());
+            return networkResponse;
+          });
+        })
+        .catch(() => {
+          // If offline, return cached response if it exists
+          return caches.match(request).then((cachedResponse) => {
+            return cachedResponse || Promise.reject('No cache for API response');
+          });
+        })
+    );
+  } else if (request.mode === "navigate") {
+    // Handle navigation requests (HTML)
     event.respondWith(
       fetch(request)
         .then((networkResponse) => {
@@ -46,7 +65,7 @@ self.addEventListener("fetch", (event) => {
     request.destination === "script" ||
     request.destination === "image"
   ) {
-    // For static assets , use cache-first strategy
+    // Handle static assets with cache-first strategy
     event.respondWith(
       caches.match(request).then((cachedResponse) => {
         return (
@@ -62,10 +81,11 @@ self.addEventListener("fetch", (event) => {
       })
     );
   } else {
-    // For all other requests, use network-first as fallback
+    // Fallback for other requests (e.g., font files)
     event.respondWith(fetch(request).catch(() => caches.match(request)));
   }
 });
+
 
 // Activate event
 self.addEventListener("activate", (event) => {
