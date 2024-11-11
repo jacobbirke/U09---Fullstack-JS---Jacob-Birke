@@ -1,12 +1,12 @@
 const express = require("express");
-const app = express();
 const dotenv = require("dotenv");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const path = require("path");  // Path module for serving static files
+const path = require("path");
 
 dotenv.config();
 
+const app = express();
 const PORT = process.env.PORT || 9000; // Default to 9000 if PORT is not set
 
 // Connect to MongoDB
@@ -20,13 +20,13 @@ mongoose
 // CORS Options
 const corsOptions = {
   origin: [
-    'https://u09-fullstack-js-jacob-birke-bohc.vercel.app', 
-    'http://localhost:5173'
-  ], 
-  credentials: true, 
+    'https://u09-fullstack-js-jacob-birke-bohc.vercel.app', // Frontend deployed URL
+    'http://localhost:5173' // Local development URL
+  ],
+  credentials: true, // If you're using cookies or session-based auth
 };
 
-// Apply CORS middleware with options before defining routes
+// Apply CORS middleware
 app.use(cors(corsOptions));
 app.use(express.json());
 
@@ -39,29 +39,28 @@ const orderRoute = require("./Routes/Order");
 // Database seeder routes
 app.use("/api/seed", databaseSeeder);
 
-// Routes for users
+// API routes (Handle API endpoints)
 app.use("/api/users", userRoute);
-
-// Routes for products
 app.use("/api/products", productRoute);
-
-// Routes for orders
 app.use("/api/orders", orderRoute);
 
-// PayPal configuration
+// PayPal configuration route
 app.use("/api/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID);
 });
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+// Serve static files from the frontend build (React app assets like JS, CSS, images)
+app.use(express.static(path.join(__dirname, 'frontend/build')));
 
-// Catch-all handler for any requests not handled above
+// Catch-all handler for frontend routes (i.e., React Router handles navigation)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  if (req.headers.accept && req.headers.accept.includes('text/html')) {
+    // Only serve index.html for requests that need React Router to handle them
+    res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
+  }
 });
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`server listening on port ${PORT}`);
+  console.log(`Server listening on port ${PORT}`);
 });
