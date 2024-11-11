@@ -6,13 +6,22 @@ const urlsToCache = [
   "/offline.html", // A simple offline page
   "/src/index.css", // CSS file (check final build output path)
   "/src/main.tsx", // JavaScript entry point (check final output path)
-  // Add any other critical files
+  '/admin',                      // Admin page
+  '/login',                        // Login page
+  '/register',                     // Register page
+  '/placeorder',                   // Place order page
+  '/products/:id',
+  '/myadmin', 
+  '/products', 
+
 ];
 
 // Pre-fetch and cache critical API data during install
 const apiUrlsToCache = [
   "/api/products",
-  // Add other important API endpoints you want to cache
+  "/api/users",
+  "/api/orders",
+  "/api/config/paypal",
 ];
 
 // Install event
@@ -63,6 +72,21 @@ self.addEventListener("fetch", (event) => {
             return cachedResponse || caches.match("/offline.html");
           });
         })
+    );
+  } else if (request.url.match(/\/products\/\d+/)) {
+    // This matches URLs like /products/1, /products/2, etc.
+    event.respondWith(
+      caches.match(request).then((cachedResponse) => {
+        return (
+          cachedResponse ||
+          fetch(request).then((networkResponse) => {
+            return caches.open(CACHE_NAME).then((cache) => {
+              cache.put(request, networkResponse.clone());
+              return networkResponse;
+            });
+          })
+        );
+      })
     );
   } else if (request.mode === "navigate") {
     // Handle navigation requests (HTML)

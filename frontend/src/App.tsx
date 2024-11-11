@@ -12,7 +12,6 @@ import { useSelector } from "react-redux";
 import Checkout from "./Pages/Checkout";
 import PlaceOrder from "./Pages/PlaceOrder";
 import AdminPage from './Pages/Admin/Admin';
-import MyAdmin from './Pages/Admin/myadmin';
 import { RootState } from './global'; // Import RootState from global.d.ts
 
 function App() {
@@ -23,7 +22,6 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/myadmin" element={<MyAdmin />}></Route>
           <Route path="/products/:id" element={<ProductDetail />}></Route>
           <Route
             path="/login"
