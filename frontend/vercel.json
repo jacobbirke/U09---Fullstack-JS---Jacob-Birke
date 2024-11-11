@@ -1,8 +1,16 @@
 {
-  "rewrites": [
-      {
-          "source": "/(.*)",
-          "destination": "/"
-      }
+  "version": 2,
+  "name": "jb-webshop-frontend",
+  "builds": [
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/frontend/build/$1"
+    }
   ]
 }
